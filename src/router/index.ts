@@ -18,15 +18,18 @@ const router = createRouter({
       children: [
         {
           path: '/user',
-          component: () => import('@/views/main-child/user/User.vue')
+          component: () => import('@/views/main-child/user/User.vue'),
+          meta: { title: ' 用户列表 ' }
         },
         {
           path: '/complaint',
-          component: () => import('@/views/main-child/complaint/Complaint.vue')
+          component: () => import('@/views/main-child/complaint/Complaint.vue'),
+          meta: { title: ' 投诉列表 ' }
         },
         {
           path: '/repair',
-          component: () => import('@/views/main-child/repair/Repair.vue')
+          component: () => import('@/views/main-child/repair/Repair.vue'),
+          meta: { title: ' 报修列表 ' }
         }
       ]
     },

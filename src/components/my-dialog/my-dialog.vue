@@ -19,10 +19,13 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+
 const props = defineProps({
+  // 标题名字
   titleName: {
     type: String
   },
+  // 确认按钮的触发函数
   confirmFn: {
     type: Function,
     default() {
@@ -30,16 +33,26 @@ const props = defineProps({
     }
   }
 })
+
+// 对话框的显示与隐藏
 let dialogVisible = ref(false)
+
+// 打开对话框
 const open = () => {
   dialogVisible.value = true
 }
+
+// 关闭对话框
 const close = () => {
   dialogVisible.value = false
 }
+
+// 点击确认触发的函数
 const confirm = () => {
   props.confirmFn()
 }
+
+// 对外暴露的变量
 defineExpose({
   open,
   close

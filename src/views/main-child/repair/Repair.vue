@@ -194,19 +194,18 @@ const {
   putEditRepairAction
 } = useEditRepair()
 
-let offset = ref(0)
-let realname = ref('')
-
 // 删除报修的hooks
 const { deleteRepair } = useDeleteRepair()
 
 // 页码改变的回调
+let offset = ref(0) // 偏移量
 const handelPageChange = (currentPage: number) => {
   offset.value = (currentPage - 1) * 10
   store.getRepairListAction(realname.value, offset.value)
 }
 
 // 搜素报修
+let realname = ref('') //搜索的文本
 const searchRepair = (realName: string) => {
   realname.value = realName
   store.getRepairListAction(realname.value)

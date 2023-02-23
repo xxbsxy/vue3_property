@@ -27,6 +27,7 @@ export function useLogin() {
     loginFormRef.value?.validate(async (isvalidate: boolean) => {
       if (isvalidate) {
         await store.loginAction({ ...loginForm })
+        store.tabList = []
         const { isAdmin } = LocalCache.getCache('user')
         if (isAdmin) {
           router.push('/user')

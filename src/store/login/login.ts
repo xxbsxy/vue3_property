@@ -1,15 +1,18 @@
 import { login } from '@/service/login'
 import { defineStore } from 'pinia'
 import LocalCache from '@/utils/cache'
-import type { ILoginResult, IUser, IAccount } from './type'
+import type { ILoginResult, IUser, IAccount, ITabList } from './type'
 export const loginStore = defineStore('login', {
   persist: true,
   state: () => {
     return {
-      user: {} as IUser
+      user: {} as IUser,
+      tabList: [] as ITabList[],
+      isCollapse: false // 控制菜单的折叠
     }
   },
   actions: {
+    // 登录
     async loginAction(data: IAccount) {
       const res = (await login(data)) as ILoginResult
       this.user = res.user

@@ -34,6 +34,8 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     GeneralTop: typeof import('./src/components/general-top/general-top.vue')['default']
     MyDialog: typeof import('./src/components/my-dialog/my-dialog.vue')['default']
@@ -42,5 +44,6 @@ declare module '@vue/runtime-core' {
     NavMenu: typeof import('./src/components/nav-menu/nav-menu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TagList: typeof import('./src/components/tag-list/tag-list.vue')['default']
   }
 }

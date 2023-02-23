@@ -1,6 +1,25 @@
 <template>
   <div class="nav-header">
-    <h2>物业管理系统</h2>
+    <div class="left-area">
+      <h2 class="title">物业管理系统</h2>
+      <div class="icons">
+        <Fold
+          style="width: 1.8em; height: 1.8em; margin-right: 8px"
+          class="fold"
+          color="#fff"
+          v-show="!isCollapse"
+          @click="changeCollapse"
+        />
+        <Expand
+          style="width: 1.8em; height: 1.8em; margin-right: 8px"
+          class="fold"
+          color="#fff"
+          v-show="isCollapse"
+          @click="changeCollapse"
+        />
+      </div>
+    </div>
+
     <div class="right-area">
       <el-dropdown>
         <span class="username">
@@ -27,9 +46,9 @@ import { loginStore } from '@/store/login/login'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 const store = loginStore()
-const { user } = storeToRefs(store)
+const { user, isCollapse } = storeToRefs(store)
 const router = useRouter()
-// 编辑用户的hooks
+
 // 退出登录
 const outLogin = () => {
   ElMessageBox.confirm(`确认要退出登录吗?`, '退出登录', {
@@ -41,6 +60,9 @@ const outLogin = () => {
     router.push('/login')
   })
 }
+const changeCollapse = () => {
+  store.isCollapse = !store.isCollapse
+}
 </script>
 <style scoped lang="less">
 .nav-header {
@@ -50,6 +72,17 @@ const outLogin = () => {
   height: 64px;
   color: rgb(240, 240, 240);
   font-weight: 400;
+  .left-area {
+    display: flex;
+    .title {
+      width: 200px;
+    }
+    .icons {
+      .fold {
+        cursor: pointer;
+      }
+    }
+  }
   .right-area {
     position: absolute;
     right: 30px;

@@ -34,33 +34,39 @@ import { reactive } from 'vue'
 import LocalCache from '@/utils/cache'
 const { isAdmin } = LocalCache.getCache('user')
 const props = defineProps({
+  // 标题文字
   titleName: {
     type: String
   },
+  // 添加按钮的文字
   btnName: {
     type: String
   },
+  // 输入框默认文字
   placeholder: {
     type: String,
     default: '请输入用户名查询'
   },
-
+  // 添加按钮的显示与隐藏
   isBtnShow: {
     type: Boolean,
     default: true
   },
+  // 搜素按钮的函数
   searchFn: {
     type: Function,
     default() {
       return () => {}
     }
   },
+  // 重置按钮的函数
   resetFn: {
     type: Function,
     default() {
       return () => {}
     }
   },
+  // 添加按钮的函数
   addFn: {
     type: Function,
     default() {
@@ -80,6 +86,7 @@ const reset = () => {
   queryForm.username = ''
   props.resetFn()
 }
+// 添加
 const add = () => {
   props.addFn()
 }

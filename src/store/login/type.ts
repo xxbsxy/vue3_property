@@ -18,3 +18,8 @@ export interface IAccount {
   username: string
   password: string
 }
+export interface ITabList {
+  title: string
+  path: string
+  name: string
+}

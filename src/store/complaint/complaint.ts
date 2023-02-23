@@ -16,6 +16,7 @@ export const complaintStore = defineStore('complaint', {
     }
   },
   actions: {
+    // 获取投诉列表的Action
     async getComplaintListAction(realname?: string, offset?: number) {
       const { isAdmin, userId } = LocalCache.getCache('user')
       if (isAdmin) {
@@ -34,12 +35,18 @@ export const complaintStore = defineStore('complaint', {
         this.total = res.total
       }
     },
+
+    // 更新投诉的Action
     async updateComplaintAction(content: string, status: string, id: number) {
       await updateComplaint(content, status, id)
     },
+
+    // 删除投诉的Action
     async deleteComplaintAction(id: number) {
       await deleteComplaint(id)
     },
+
+    // 添加投诉的Action
     async addComplaintAction(content: string, userId: number) {
       await addComplaint(content, userId)
     }

@@ -43,20 +43,11 @@
 
 <script setup lang="ts">
 import { UserFilled, PhoneFilled } from '@element-plus/icons-vue'
-import { onBeforeUnmount, onMounted } from 'vue'
+
 import { useLogin } from './hooks/useLogin'
 import type { ElForm } from 'element-plus'
 
-const { loginFormRef, loginForm, onKeyUp, loginRules, login } = useLogin()
-
-//监听键盘事件
-onMounted(() => {
-  document.addEventListener('keyup', onKeyUp)
-})
-// //移除键盘事件
-onBeforeUnmount(() => {
-  document.removeEventListener('keyup', onKeyUp)
-})
+const { loginFormRef, loginForm, loginRules, login } = useLogin()
 </script>
 <style scoped lang="less">
 .login {

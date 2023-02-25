@@ -26,7 +26,7 @@ export function useAddUser() {
     ],
     password: [
       { required: true, message: '请输入密码', trigger: 'blur' },
-      { min: 6, max: 20, message: '密码必须在6到20位之间', trigger: 'blur' }
+      { min: 6, max: 50, message: '密码必须在6到20位之间', trigger: 'blur' }
     ],
     age: [
       { required: true, message: '请输入年龄', trigger: 'blur' },
@@ -52,6 +52,7 @@ export function useAddUser() {
         await store.addUserAction({ ...addUserForm })
         await store.getUserList(username, offset)
         addDialogRef.value.close()
+        addUserFormRef.value.resetFields()
       }
     })
   }

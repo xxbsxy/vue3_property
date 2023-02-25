@@ -26,6 +26,7 @@ export function useAddComplaint(userId: number) {
         await store.addComplaintAction(addComplaintForm.content, userId)
         await store.getComplaintListAction(realname, offset)
         addComplaintDialogRef.value.close()
+        addComplaintFormRef.value.resetFields()
       }
     })
   }

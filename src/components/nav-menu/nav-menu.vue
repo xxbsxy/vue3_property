@@ -58,17 +58,29 @@ const menuList = isAdmin
         name: '报修管理',
         icon: 'Tools',
         children: [{ id: 1, name: '报修列表', path: '/repair' }]
+      },
+      {
+        id: 4,
+        name: '房屋管理',
+        icon: 'HomeFilled',
+        children: [{ id: 1, name: '房屋列表', path: '/home' }]
       }
     ]
   : [
       {
         id: 1,
+        name: '个人中心',
+        icon: 'UserFilled',
+        children: [{ id: 1, name: '个人资料', path: '/information' }]
+      },
+      {
+        id: 2,
         name: '投诉管理',
         icon: 'InfoFilled',
         children: [{ id: 1, name: '投诉列表', path: '/complaint' }]
       },
       {
-        id: 2,
+        id: 3,
         name: '报修管理',
         icon: 'Tools',
         children: [{ id: 1, name: '报修列表', path: '/repair' }]

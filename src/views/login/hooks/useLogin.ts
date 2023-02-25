@@ -32,7 +32,7 @@ export function useLogin() {
         if (isAdmin) {
           router.push('/user')
         } else {
-          router.push('/complaint')
+          router.push('/information')
         }
       }
     })

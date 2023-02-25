@@ -2,6 +2,8 @@ import { login } from '@/service/login'
 import { defineStore } from 'pinia'
 import LocalCache from '@/utils/cache'
 import type { ILoginResult, IUser, IAccount, ITabList } from './type'
+import type { IEditUser } from '../user/type'
+import { editUser } from '@/service/user'
 export const loginStore = defineStore('login', {
   persist: true,
   state: () => {
@@ -23,6 +25,10 @@ export const loginStore = defineStore('login', {
         userId: res.user.id,
         realName: res.user.realname
       })
+    },
+    // 编辑用户的Action
+    async editUserAction(data: IEditUser, id: number) {
+      await editUser(data, id)
     }
   }
 })

@@ -36,6 +36,7 @@ export function useAddRepair(userId: number) {
         )
         await store.getRepairListAction(realname, offset)
         addRepairDialogRef.value.close()
+        addRepairFormRef.value.resetFields()
       }
     })
   }

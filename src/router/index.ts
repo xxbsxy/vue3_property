@@ -30,6 +30,17 @@ const router = createRouter({
           path: '/repair',
           component: () => import('@/views/main-child/repair/Repair.vue'),
           meta: { title: ' 报修列表 ' }
+        },
+        {
+          path: '/home',
+          component: () => import('@/views/main-child/home/Home.vue'),
+          meta: { title: ' 房屋列表 ' }
+        },
+        {
+          path: '/information',
+          component: () =>
+            import('@/views/main-child/information/Information.vue'),
+          meta: { title: ' 个人资料 ' }
         }
       ]
     },

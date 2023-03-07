@@ -37,6 +37,16 @@ const router = createRouter({
           meta: { title: ' 房屋列表 ' }
         },
         {
+          path: '/car',
+          component: () => import('@/views/main-child/car/Car.vue'),
+          meta: { title: ' 停车位列表 ' }
+        },
+        {
+          path: '/property',
+          component: () => import('@/views/main-child/property/Property.vue'),
+          meta: { title: ' 物业费列表 ' }
+        },
+        {
           path: '/information',
           component: () =>
             import('@/views/main-child/information/Information.vue'),

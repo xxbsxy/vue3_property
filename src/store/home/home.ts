@@ -23,12 +23,10 @@ export const homeStore = defineStore('home', {
     },
     // 添加一个房屋
     async addHomeAction(data: IAddHomeData) {
-      console.log(data)
       await addHome(data)
     },
     // 更新一个房屋
     async updateHomeAction(data: IAddHomeData, id: number) {
-      // console.log(data, id)
       await updateHome(data, id)
     }
   }

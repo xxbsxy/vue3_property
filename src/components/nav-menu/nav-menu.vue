@@ -64,6 +64,18 @@ const menuList = isAdmin
         name: '房屋管理',
         icon: 'HomeFilled',
         children: [{ id: 1, name: '房屋列表', path: '/home' }]
+      },
+      {
+        id: 5,
+        name: '停车位管理',
+        icon: 'Promotion',
+        children: [{ id: 1, name: '停车位列表', path: '/car' }]
+      },
+      {
+        id: 6,
+        name: '物业费管理',
+        icon: 'List',
+        children: [{ id: 1, name: '物业费列表', path: '/property' }]
       }
     ]
   : [

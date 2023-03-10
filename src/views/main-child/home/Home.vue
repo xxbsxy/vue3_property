@@ -6,6 +6,7 @@
       :add-fn="addHomeBtn"
       :search-fn="searchHome"
       :reset-fn="resetHome"
+      :is-btn-show="isAdmin"
     />
     <!-- 投诉列表 -->
     <el-table :data="homeList" stripe style="width: 100%" border>
@@ -45,6 +46,7 @@
               :icon="Delete"
               :underline="false"
               @click="() => deleteHome(scope.row.id, realname, offset)"
+              v-if="isAdmin"
             >
               删除
             </el-link>
@@ -76,9 +78,9 @@
         </el-form-item>
       </el-form>
     </my-dialog>
-    <!-- 编辑投诉内容 -->
+    <!-- 编辑房屋内容 -->
     <my-dialog
-      title-name="编辑投诉"
+      title-name="编辑房屋"
       :confirm-fn="() => putEditHomeAction(realname, offset)"
       ref="editHomeDialogRef"
     >
@@ -90,10 +92,10 @@
         ref="editHomeFormRef"
       >
         <el-form-item label="房屋位置" prop="position">
-          <el-input v-model="editHomeForm.position" />
+          <el-input v-model="editHomeForm.position" :disabled="!isAdmin" />
         </el-form-item>
         <el-form-item label="房屋面积" prop="area">
-          <el-input v-model="editHomeForm.area" />
+          <el-input v-model="editHomeForm.area" :disabled="!isAdmin" />
         </el-form-item>
         <el-form-item label="房屋描述" prop="des">
           <el-input v-model="editHomeForm.des" />
@@ -121,9 +123,11 @@ import MyPagination from '@/components/my-pagination/my-pagination.vue'
 import { useDeleteHome } from './hooks/useDeleteHome'
 import { useAddHome } from './hooks/useAddHome'
 import { useEditHome } from './hooks/useEditHome'
+import LocalCache from '@/utils/cache'
 
 const store = homeStore()
 const { homeList, total } = storeToRefs(store)
+const { isAdmin } = LocalCache.getCache('user')
 
 // 添加房屋的hooks
 const {

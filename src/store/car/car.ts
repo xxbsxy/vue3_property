@@ -1,6 +1,7 @@
 import { getCarList, deleteCar, addCar, updateCar } from '@/service/car'
 import { defineStore } from 'pinia'
 import type { ICarList, ICarListObject, IAddCarData } from './type'
+import LocalCache from '@/utils/cache'
 export const carStore = defineStore('car', {
   persist: true,
   state: () => {
@@ -12,9 +13,16 @@ export const carStore = defineStore('car', {
   actions: {
     // 获取车位的Action
     async getCarListAction(realname?: string, offset?: number) {
-      const res = (await getCarList(realname, offset)) as ICarListObject
-      this.carList = res.carList
-      this.total = res.total
+      const { realName, isAdmin } = LocalCache.getCache('user')
+      if (isAdmin) {
+        const res = (await getCarList(realname, offset)) as ICarListObject
+        this.carList = res.carList
+        this.total = res.total
+      } else {
+        const res = (await getCarList(realName, offset)) as ICarListObject
+        this.carList = res.carList
+        this.total = res.total
+      }
     },
     // 删除车位的Action
     async deleteCarAction(id: number) {

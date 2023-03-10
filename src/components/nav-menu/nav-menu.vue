@@ -96,6 +96,24 @@ const menuList = isAdmin
         name: '报修管理',
         icon: 'Tools',
         children: [{ id: 1, name: '报修列表', path: '/repair' }]
+      },
+      {
+        id: 4,
+        name: '房屋管理',
+        icon: 'HomeFilled',
+        children: [{ id: 1, name: '我的房屋', path: '/home' }]
+      },
+      {
+        id: 5,
+        name: '停车位管理',
+        icon: 'Promotion',
+        children: [{ id: 1, name: '我的停车位', path: '/car' }]
+      },
+      {
+        id: 6,
+        name: '物业费管理',
+        icon: 'List',
+        children: [{ id: 1, name: '物业费列表', path: '/property' }]
       }
     ]
 </script>

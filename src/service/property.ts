@@ -22,3 +22,11 @@ export function updateProperty(data: IUpdateData, id: number) {
     data
   })
 }
+
+// 编辑物业信息
+export function updatePropertyStatus(id: number) {
+  return myRequest.request({
+    method: 'PUT',
+    url: `/property/status/${id}`
+  })
+}

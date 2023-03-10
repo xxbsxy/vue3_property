@@ -7,6 +7,7 @@
       :search-fn="searchCar"
       :reset-fn="resetCar"
       :add-fn="addCarBtn"
+      :is-btn-show="isAdmin"
     ></general-top>
     <el-table :data="carList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
@@ -44,6 +45,7 @@
               type="danger"
               :icon="Delete"
               @click="() => deleteCar(scope.row.id, realname, offset)"
+              v-if="isAdmin"
             >
               删除
             </el-link>
@@ -91,13 +93,13 @@
         ref="editCarFormRef"
       >
         <el-form-item label="停车位位置" prop="position">
-          <el-input v-model="editCarForm.position" />
+          <el-input v-model="editCarForm.position" :disabled="!isAdmin" />
         </el-form-item>
         <el-form-item label="停车位面积" prop="area">
-          <el-input v-model="editCarForm.area" />
+          <el-input v-model="editCarForm.area" :disabled="!isAdmin" />
         </el-form-item>
         <el-form-item label="停车位价格" prop="fees" type="number">
-          <el-input v-model="editCarForm.fees" />
+          <el-input v-model="editCarForm.fees" :disabled="!isAdmin" />
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="editCarForm.remark" />
@@ -124,9 +126,11 @@ import MyPagination from '@/components/my-pagination/my-pagination.vue'
 import { useDeleteCar } from './hooks/useDeleteCar'
 import { useAddCar } from './hooks/useAddCar'
 import { useEditCar } from './hooks/useEditCar'
+import LocalCache from '@/utils/cache'
 
 const store = carStore()
 const { carList, total } = storeToRefs(store)
+const { isAdmin } = LocalCache.getCache('user')
 
 // 编辑停车位的hooks
 const {

@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { getHomeList, deleteHome, addHome, updateHome } from '@/service/home'
 import type { IHomeList, IHomeListObject, IAddHomeData } from './type'
+import LocalCache from '@/utils/cache'
 export const homeStore = defineStore('home', {
   persist: true,
   state: () => {
@@ -12,9 +13,16 @@ export const homeStore = defineStore('home', {
   actions: {
     // 获取房屋列表
     async getHomeListAction(realname?: string, offset?: number) {
-      const res = (await getHomeList(realname, offset)) as IHomeListObject
-      this.total = res.total
-      this.homeList = res.homeList
+      const { realName, isAdmin } = LocalCache.getCache('user')
+      if (isAdmin) {
+        const res = (await getHomeList(realname, offset)) as IHomeListObject
+        this.total = res.total
+        this.homeList = res.homeList
+      } else {
+        const res = (await getHomeList(realName, offset)) as IHomeListObject
+        this.total = res.total
+        this.homeList = res.homeList
+      }
     },
 
     // 删除一个房屋

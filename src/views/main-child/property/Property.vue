@@ -59,8 +59,18 @@
               :icon="EditPen"
               :underline="false"
               @click="editPropertyBtn(scope.row)"
+              v-if="isAdmin"
             >
               编辑
+            </el-link>
+            <el-link
+              type="success"
+              :icon="HelpFilled"
+              :underline="false"
+              v-if="!isAdmin && scope.row.status === '未缴费'"
+              @click="paymentBtn(scope.row.id)"
+            >
+              缴费
             </el-link>
           </div>
         </template>
@@ -110,6 +120,27 @@
         </el-form-item>
       </el-form>
     </my-dialog>
+    <my-dialog
+      title-name="缴纳物业费"
+      ref="paymentDialogRef"
+      :confirm-fn="payFees"
+    >
+      <el-form label-width="100px" style="max-width: 460px">
+        <el-form-item label="缴纳金额">
+          <el-input v-model="fees" disabled />
+        </el-form-item>
+        <el-form-item label="缴纳方式">
+          <el-select v-model="pay" class="m-2" placeholder="Select">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </my-dialog>
     <!-- 分页信息 -->
     <my-pagination
       :total="total"
@@ -120,7 +151,7 @@
 </template>
 
 <script setup lang="ts">
-import { EditPen } from '@element-plus/icons-vue'
+import { EditPen, HelpFilled } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import generalTop from '@/components/general-top/general-top.vue'
 import { propertyStore } from '@/store/property/property'
@@ -128,10 +159,40 @@ import { storeToRefs } from 'pinia'
 import { renderTime } from '@/utils/render-time'
 import MyPagination from '@/components/my-pagination/my-pagination.vue'
 import { useEditProperty } from './hooks/useEditProperty'
+import LocalCache from '@/utils/cache'
+import MyDialog from '@/components/my-dialog/my-dialog.vue'
+const options = [
+  {
+    value: '微信支付',
+    label: '微信支付'
+  },
+  {
+    value: '支付宝支付',
+    label: '支付宝支付'
+  },
+  {
+    value: '银行卡支付',
+    label: '银行卡支付'
+  }
+]
+const pay = ref('微信支付')
+const fees = ref(300)
+
+const payFees = async () => {
+  await store.updatePropertyStatusAction(propertyId.value)
+  await store.getPropertyListAction()
+  paymentDialogRef.value.close()
+}
 
 const store = propertyStore()
 const { propertyList, total } = storeToRefs(store)
+const { isAdmin } = LocalCache.getCache('user')
+const paymentDialogRef = ref()
 
+const paymentBtn = (id: number) => {
+  propertyId.value = id
+  paymentDialogRef.value.open()
+}
 // 编辑物业费用的hooks
 const {
   editPropertyDialogRef,
@@ -139,7 +200,8 @@ const {
   editPropertyForm,
   editPropertyBtn,
   editPropertyRule,
-  putEditPropertyAction
+  putEditPropertyAction,
+  propertyId
 } = useEditProperty()
 
 // 页码改变的回调
@@ -167,4 +229,8 @@ onMounted(() => {
   store.getPropertyListAction()
 })
 </script>
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.el-link {
+  margin-right: 20px;
+}
+</style>

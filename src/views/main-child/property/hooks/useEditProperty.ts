@@ -53,6 +53,7 @@ export function useEditProperty() {
     editPropertyForm,
     editPropertyBtn,
     editPropertyRule,
-    putEditPropertyAction
+    putEditPropertyAction,
+    propertyId
   }
 }

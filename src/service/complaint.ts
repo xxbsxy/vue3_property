@@ -17,6 +17,8 @@ export function updateComplaint(
   remark: string,
   type: string,
   status: string,
+  handle_phone: string,
+  handle_user: string,
   id: number
 ) {
   return myRequest.request({
@@ -26,7 +28,9 @@ export function updateComplaint(
       content,
       remark,
       type,
-      status
+      status,
+      handle_phone,
+      handle_user
     }
   })
 }

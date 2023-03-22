@@ -12,6 +12,8 @@ export interface IRepairList {
   status: string
   remark: string
   type: string
+  handle_phone: string
+  handle_user: string
   createtime: string
   user: IUser
 }

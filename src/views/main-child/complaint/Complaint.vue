@@ -53,6 +53,16 @@
           >
         </template>
       </el-table-column>
+      <el-table-column label="处理人" width="130">
+        <template #default="scope">
+          {{ scope.row.handle_user ? scope.row.handle_user : '无' }}
+        </template>
+      </el-table-column>
+      <el-table-column label="联系方式" width="130">
+        <template #default="scope">
+          {{ scope.row.handle_phone ? scope.row.handle_phone : '无' }}</template
+        >
+      </el-table-column>
       <el-table-column label="操作" min-width="200px">
         <template #default="scope">
           <div class="control">
@@ -107,6 +117,12 @@
         <el-form-item label="备注" prop="remark">
           <el-input v-model="editComplaintForm.remark" />
         </el-form-item>
+        <el-form-item label="处理人" prop="handle_user">
+          <el-input v-model="editComplaintForm.handle_user" />
+        </el-form-item>
+        <el-form-item label="联系方式" prop="handle_phone">
+          <el-input v-model="editComplaintForm.handle_phone" />
+        </el-form-item>
       </el-form>
     </my-dialog>
 
@@ -119,6 +135,7 @@
       <el-form
         label-width="100px"
         :model="editComplaintForm"
+        :rules="editComplaintRule"
         style="max-width: 460px"
         ref="editComplaintFormRef"
       >
@@ -128,6 +145,12 @@
             <el-radio label="处理中">处理中</el-radio>
             <el-radio label="已处理">已处理</el-radio>
           </el-radio-group>
+        </el-form-item>
+        <el-form-item label="处理人" prop="handle_user">
+          <el-input v-model="editComplaintForm.handle_user" />
+        </el-form-item>
+        <el-form-item label="联系方式" prop="handle_phone">
+          <el-input v-model="editComplaintForm.handle_phone" />
         </el-form-item>
       </el-form>
     </my-dialog>

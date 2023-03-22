@@ -9,6 +9,7 @@ export function useAddHome() {
   const addHomeForm = reactive({
     position: '',
     area: '',
+    type: '',
     des: ''
   })
   // 点击添加房屋打开对话框
@@ -28,6 +29,10 @@ export function useAddHome() {
     des: [
       { required: true, message: '请输入房屋描述', trigger: 'blur' },
       { min: 0, max: 250, message: '房屋描述最多250个字', trigger: 'blur' }
+    ],
+    type: [
+      { required: true, message: '请输入房屋类型', trigger: 'blur' },
+      { min: 0, max: 250, message: '房屋类型最多10个字', trigger: 'blur' }
     ]
   })
   // 点击确认派发添加房屋Action

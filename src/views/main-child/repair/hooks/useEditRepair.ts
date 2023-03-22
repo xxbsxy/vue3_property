@@ -13,6 +13,8 @@ export function useEditRepair() {
     place: '',
     remark: '',
     type: '',
+    handle_user: '',
+    handle_phone: '',
     status: ''
   })
 
@@ -28,11 +30,24 @@ export function useEditRepair() {
     ],
     remark: [
       { required: true, message: '请输入备注', trigger: 'blur' },
-      { min: 0, max: 30, message: '备注最多100个字', trigger: 'blur' }
+      { min: 0, max: 100, message: '备注最多100个字', trigger: 'blur' }
     ],
     type: [
       { required: true, message: '请输入报修类型', trigger: 'blur' },
-      { min: 0, max: 30, message: '报修类型最多10个字', trigger: 'blur' }
+      { min: 0, max: 10, message: '报修类型最多10个字', trigger: 'blur' }
+    ],
+    handle_user: [
+      { required: true, message: '请输入处理人员的名字', trigger: 'blur' },
+      { min: 0, max: 10, message: '处理人员的名字最多10个字', trigger: 'blur' }
+    ],
+    handle_phone: [
+      { required: true, message: '请输入手机号码', trigger: 'blur' },
+      { min: 11, max: 11, message: '请输入11位手机号码', trigger: 'blur' },
+      {
+        pattern:
+          /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
+        message: '请输入正确的手机号码'
+      }
     ]
   })
 
@@ -41,6 +56,8 @@ export function useEditRepair() {
     editRepairForm.content = repair.content
     editRepairForm.place = repair.place
     editRepairForm.remark = repair.remark
+    editRepairForm.handle_phone = repair.handle_phone
+    editRepairForm.handle_user = repair.handle_user
     editRepairForm.type = repair.type
 
     editRepairForm.status = repair.status
@@ -58,6 +75,8 @@ export function useEditRepair() {
           editRepairForm.remark,
           editRepairForm.type,
           editRepairForm.status,
+          editRepairForm.handle_phone,
+          editRepairForm.handle_user,
           repairId.value
         )
         await store.getRepairListAction(realname, offset)
@@ -68,15 +87,17 @@ export function useEditRepair() {
   }
 
   // 处理报修
-
   const handleRepairDialogRef = ref() // 处理报修对话框的ref
-  // 点击确认获取处理投诉的内容并打开对话框
+  // 点击确认获取处理报修的内容并打开对话框
   const handelRepair = (repair: IRepairList) => {
     editRepairForm.content = repair.content
     editRepairForm.place = repair.place
     editRepairForm.remark = repair.remark
     editRepairForm.type = repair.type
     editRepairForm.status = repair.status
+    editRepairForm.handle_phone = repair.handle_phone
+    editRepairForm.handle_user = repair.handle_user
+
     repairId.value = repair.id
     handleRepairDialogRef.value.open()
   }

@@ -42,9 +42,19 @@ export const complaintStore = defineStore('complaint', {
       remark: string,
       type: string,
       status: string,
+      handle_phone: string,
+      handle_user: string,
       id: number
     ) {
-      await updateComplaint(content, remark, type, status, id)
+      await updateComplaint(
+        content,
+        remark,
+        type,
+        status,
+        handle_phone,
+        handle_user,
+        id
+      )
     },
 
     // 删除投诉的Action

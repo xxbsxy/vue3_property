@@ -23,6 +23,8 @@ export function updateRepair(
   remark: string,
   type: string,
   status: string,
+  handle_phone: string,
+  handle_user: string,
   id: number
 ) {
   return myRequest.request({
@@ -33,7 +35,9 @@ export function updateRepair(
       place,
       remark,
       type,
-      status
+      status,
+      handle_phone,
+      handle_user
     }
   })
 }

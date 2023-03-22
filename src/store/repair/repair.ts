@@ -39,9 +39,20 @@ export const repairStore = defineStore('repair', {
       remark: string,
       type: string,
       status: string,
+      handle_phone: string,
+      handle_user: string,
       id: number
     ) {
-      await updateRepair(content, place, remark, type, status, id)
+      await updateRepair(
+        content,
+        place,
+        remark,
+        type,
+        status,
+        handle_phone,
+        handle_user,
+        id
+      )
     },
     // 删除报修的Action
     async deleteRepairAction(id: number) {

@@ -1,6 +1,11 @@
 import { getCarList, deleteCar, addCar, updateCar } from '@/service/car'
 import { defineStore } from 'pinia'
-import type { ICarList, ICarListObject, IAddCarData } from './type'
+import type {
+  ICarList,
+  ICarListObject,
+  IAddCarData,
+  IUpdateCarData
+} from './type'
 import LocalCache from '@/utils/cache'
 export const carStore = defineStore('car', {
   persist: true,
@@ -33,7 +38,7 @@ export const carStore = defineStore('car', {
       await addCar(data)
     },
     // 更新投诉的Action
-    async updateCarAction(data: IAddCarData, id: number) {
+    async updateCarAction(data: IUpdateCarData, id: number) {
       await updateCar(data, id)
     }
   }

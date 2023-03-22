@@ -13,10 +13,10 @@
     <el-table :data="repairList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
       <el-table-column prop="content" label="报修内容" width="200" />
-      <el-table-column prop="place" label="报修地点" width="150" />
+      <el-table-column prop="place" label="报修地点" width="130" />
       <el-table-column prop="type" label="维修类型" width="100" />
       <el-table-column prop="remark" label="备注" width="100" />
-      <el-table-column label="报修人" width="130">
+      <el-table-column label="报修人" width="100">
         <template #default="scope">
           {{ scope.row.user.realname }}
         </template>
@@ -52,6 +52,16 @@
             >{{ scope.row.status }}</el-tag
           >
         </template>
+      </el-table-column>
+      <el-table-column label="处理人" width="100">
+        <template #default="scope">
+          {{ scope.row.handle_user ? scope.row.handle_user : '无' }}
+        </template>
+      </el-table-column>
+      <el-table-column label="联系方式" width="130">
+        <template #default="scope">
+          {{ scope.row.handle_phone ? scope.row.handle_phone : '无' }}</template
+        >
       </el-table-column>
       <el-table-column label="操作" min-width="200px">
         <template #default="scope">
@@ -110,6 +120,12 @@
         <el-form-item label="报修类型" prop="type">
           <el-input v-model="editRepairForm.type" />
         </el-form-item>
+        <el-form-item label="处理人" prop="handle_user">
+          <el-input v-model="editRepairForm.handle_user" />
+        </el-form-item>
+        <el-form-item label="联系方式" prop="handle_phone">
+          <el-input v-model="editRepairForm.handle_phone" />
+        </el-form-item>
       </el-form>
     </my-dialog>
 
@@ -130,6 +146,12 @@
             <el-radio label="处理中">处理中</el-radio>
             <el-radio label="已处理">已处理</el-radio>
           </el-radio-group>
+          <el-form-item label="处理人" prop="handle_user">
+            <el-input v-model="editRepairForm.handle_user" />
+          </el-form-item>
+          <el-form-item label="联系方式" prop="handle_phone">
+            <el-input v-model="editRepairForm.handle_phone" />
+          </el-form-item>
         </el-form-item>
       </el-form>
     </my-dialog>

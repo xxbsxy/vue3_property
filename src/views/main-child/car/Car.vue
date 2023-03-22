@@ -112,7 +112,10 @@
         <el-form-item label="停车位价格" prop="fees" type="number">
           <el-input v-model="editCarForm.fees" :disabled="!isAdmin" />
         </el-form-item>
-        <el-form-item label="备注" prop="remark">
+        <el-form-item label="车牌号码" prop="car_num">
+          <el-input v-model="editCarForm.car_num" />
+        </el-form-item>
+        <el-form-item label="备注" prop="remcark">
           <el-input v-model="editCarForm.remark" />
         </el-form-item>
       </el-form>

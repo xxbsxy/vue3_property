@@ -1,3 +1,4 @@
+import type { IUpdateCarData } from '@/store/car/type'
 import myRequest from './api'
 
 export function getCarList(realname?: string, offset?: number) {
@@ -26,7 +27,7 @@ export function addCar(data: IAddCarData) {
   })
 }
 
-export function updateCar(data: IAddCarData, id: number) {
+export function updateCar(data: IUpdateCarData, id: number) {
   return myRequest.request({
     method: 'PUT',
     url: `/car/${id}`,

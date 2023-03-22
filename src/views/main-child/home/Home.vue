@@ -8,7 +8,7 @@
       :reset-fn="resetHome"
       :is-btn-show="isAdmin"
     />
-    <!-- 投诉列表 -->
+    <!-- 房屋列表 -->
     <el-table :data="homeList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
       <el-table-column prop="position" label="房屋位置" width="130" />
@@ -86,6 +86,9 @@
         </el-form-item>
         <el-form-item label="房屋描述" prop="des">
           <el-input v-model="addHomeForm.des" />
+        </el-form-item>
+        <el-form-item label="房屋类型" prop="type">
+          <el-input v-model="addHomeForm.type" />
         </el-form-item>
       </el-form>
     </my-dialog>

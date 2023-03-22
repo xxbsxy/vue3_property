@@ -27,3 +27,10 @@ export interface IAddCarData {
   fees: string
   remark: string
 }
+export interface IUpdateCarData {
+  position: string
+  area: string
+  fees: string
+  car_num: string
+  remark: string
+}

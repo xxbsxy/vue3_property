@@ -18,8 +18,7 @@ export function useEditHome() {
     editHomeForm.position = home.position
     editHomeForm.area = home.area
     editHomeForm.des = home.des
-    editHomeForm.des = home.type
-
+    editHomeForm.type = home.type
     editHomeDialogRef.value.open()
   }
   // 编辑房屋表单的规则

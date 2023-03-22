@@ -11,6 +11,8 @@ export function useEditRepair() {
   const editRepairForm = reactive({
     content: '',
     place: '',
+    remark: '',
+    type: '',
     status: ''
   })
 
@@ -23,13 +25,24 @@ export function useEditRepair() {
     place: [
       { required: true, message: '请输入报修地点', trigger: 'blur' },
       { min: 0, max: 30, message: '报修地点最多30个字', trigger: 'blur' }
+    ],
+    remark: [
+      { required: true, message: '请输入备注', trigger: 'blur' },
+      { min: 0, max: 30, message: '备注最多100个字', trigger: 'blur' }
+    ],
+    type: [
+      { required: true, message: '请输入报修类型', trigger: 'blur' },
+      { min: 0, max: 30, message: '报修类型最多10个字', trigger: 'blur' }
     ]
   })
 
-  // 点击编辑按钮获取投诉的内容并打开对话框
+  // 点击编辑按钮获取报修的内容并打开对话框
   const editRepair = (repair: IRepairList) => {
     editRepairForm.content = repair.content
     editRepairForm.place = repair.place
+    editRepairForm.remark = repair.remark
+    editRepairForm.type = repair.type
+
     editRepairForm.status = repair.status
     repairId.value = repair.id
     editRepairDialogRef.value.open()
@@ -42,6 +55,8 @@ export function useEditRepair() {
         await store.updateRepairAction(
           editRepairForm.content,
           editRepairForm.place,
+          editRepairForm.remark,
+          editRepairForm.type,
           editRepairForm.status,
           repairId.value
         )
@@ -59,6 +74,8 @@ export function useEditRepair() {
   const handelRepair = (repair: IRepairList) => {
     editRepairForm.content = repair.content
     editRepairForm.place = repair.place
+    editRepairForm.remark = repair.remark
+    editRepairForm.type = repair.type
     editRepairForm.status = repair.status
     repairId.value = repair.id
     handleRepairDialogRef.value.open()

@@ -76,6 +76,12 @@ const menuList = isAdmin
         name: '物业费管理',
         icon: 'List',
         children: [{ id: 1, name: '物业费列表', path: '/property' }]
+      },
+      {
+        id: 6,
+        name: '水电费管理',
+        icon: 'Briefcase',
+        children: [{ id: 1, name: '水电费列表', path: '/power' }]
       }
     ]
   : [
@@ -114,6 +120,12 @@ const menuList = isAdmin
         name: '物业费管理',
         icon: 'List',
         children: [{ id: 1, name: '物业费列表', path: '/property' }]
+      },
+      {
+        id: 6,
+        name: '水电费管理',
+        icon: 'Briefcase',
+        children: [{ id: 1, name: '水电费列表', path: '/power' }]
       }
     ]
 </script>

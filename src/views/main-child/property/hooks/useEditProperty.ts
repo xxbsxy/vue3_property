@@ -28,8 +28,8 @@ export function useEditProperty() {
   // 编辑物业表单的规则
   const editPropertyRule = reactive({
     remark: [
-      { required: true, message: '物业费介绍', trigger: 'blur' },
-      { min: 0, max: 50, message: '房屋位置最多100个字', trigger: 'blur' }
+      { required: true, message: '物业费介绍不能为空', trigger: 'blur' },
+      { min: 0, max: 50, message: '物业费介绍最多100个字', trigger: 'blur' }
     ],
     fees: [{ required: true, message: '物业费费用', trigger: 'blur' }]
   })

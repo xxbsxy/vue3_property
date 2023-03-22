@@ -9,6 +9,8 @@ export interface IComplaintList {
   id: number
   content: string
   status: string
+  remark: string
+  type: string
   createtime: string
   user: IUser
 }

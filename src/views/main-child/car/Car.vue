@@ -12,15 +12,26 @@
     <el-table :data="carList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
       <el-table-column prop="position" label="停车位位置" width="160" />
-      <el-table-column prop="area" label="停车位面积" width="160" />
-      <el-table-column prop="fees" label="停车位价格" width="150" />
-      <el-table-column prop="remark" label="备注" width="150" />
-      <el-table-column label="车主" width="130">
+      <el-table-column prop="area" label="停车位面积" width="130" />
+      <el-table-column prop="fees" label="停车位价格" width="130" />
+      <el-table-column prop="car_num" label="车牌号码" width="130" />
+      <el-table-column label="车位状态" width="130">
+        <template #default="scope">
+          <el-tag class="ml-2" type="danger" v-if="!scope.row.user.realname">
+            空闲
+          </el-tag>
+          <el-tag class="ml-2" type="success" v-if="scope.row.user.realname"
+            >已出售</el-tag
+          >
+        </template>
+      </el-table-column>
+      <el-table-column prop="remark" label="备注" width="130" />
+      <el-table-column label="车主" width="100">
         <template #default="scope">
           {{ scope.row.user.realname ? scope.row.user.realname : '/' }}
         </template>
       </el-table-column>
-      <el-table-column label="联系方式" width="180">
+      <el-table-column label="联系方式" width="150">
         <template #default="scope">
           {{ scope.row.user.phone ? scope.row.user.phone : '/' }}
         </template>

@@ -6,18 +6,31 @@ export function useEditComplaint() {
   const editComplaintFormRef = ref() // 编辑投诉表单的ref
   const editComplaintForm = reactive({
     content: '',
+    remark: '',
+    type: '',
     status: ''
   })
   const editComplaintRule = reactive({
     content: [
       { required: true, message: '请输入投诉内容', trigger: 'blur' },
       { min: 0, max: 100, message: '投诉内容最多100个字', trigger: 'blur' }
+    ],
+    remark: [
+      { required: true, message: '请输入备注', trigger: 'blur' },
+      { min: 0, max: 30, message: '备注最多100个字', trigger: 'blur' }
+    ],
+    type: [
+      { required: true, message: '请输入投诉类型', trigger: 'blur' },
+      { min: 0, max: 30, message: '投诉类型最多10个字', trigger: 'blur' }
     ]
   })
   const complaintId = ref(-1)
   // 点击编辑按钮获取投诉内容
   const editContent = (complaint: any) => {
     editComplaintForm.content = complaint.content
+    editComplaintForm.remark = complaint.remark
+    editComplaintForm.type = complaint.type
+
     editComplaintForm.status = complaint.status
     complaintId.value = complaint.id
     editComplaintDialogRef.value.open()
@@ -28,6 +41,8 @@ export function useEditComplaint() {
       if (isValidate) {
         await store.updateComplaintAction(
           editComplaintForm.content,
+          editComplaintForm.remark,
+          editComplaintForm.type,
           editComplaintForm.status,
           complaintId.value
         )

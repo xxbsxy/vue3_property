@@ -47,6 +47,11 @@ const router = createRouter({
           meta: { title: ' 物业费列表 ' }
         },
         {
+          path: '/power',
+          component: () => import('@/views/main-child/power/Power.vue'),
+          meta: { title: ' 物业费列表 ' }
+        },
+        {
           path: '/information',
           component: () =>
             import('@/views/main-child/information/Information.vue'),

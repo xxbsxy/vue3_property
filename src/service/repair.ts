@@ -20,6 +20,8 @@ export function getUserRepairList(id: number, offset?: number, size?: number) {
 export function updateRepair(
   content: string,
   place: string,
+  remark: string,
+  type: string,
   status: string,
   id: number
 ) {
@@ -29,6 +31,8 @@ export function updateRepair(
     data: {
       content,
       place,
+      remark,
+      type,
       status
     }
   })
@@ -39,13 +43,21 @@ export function deleteRepair(id: number) {
     url: `/repair/${id}`
   })
 }
-export function addRepair(content: string, place: string, userId: number) {
+export function addRepair(
+  content: string,
+  place: string,
+  remark: string,
+  type: string,
+  userId: number
+) {
   return myRequest.request({
     method: 'POST',
     url: `/repair`,
     data: {
       content,
       place,
+      remark,
+      type,
       userId
     }
   })

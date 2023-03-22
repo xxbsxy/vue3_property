@@ -10,6 +10,8 @@ export interface IRepairList {
   content: string
   place: string
   status: string
+  remark: string
+  type: string
   createtime: string
   user: IUser
 }

@@ -37,8 +37,14 @@ export const complaintStore = defineStore('complaint', {
     },
 
     // 更新投诉的Action
-    async updateComplaintAction(content: string, status: string, id: number) {
-      await updateComplaint(content, status, id)
+    async updateComplaintAction(
+      content: string,
+      remark: string,
+      type: string,
+      status: string,
+      id: number
+    ) {
+      await updateComplaint(content, remark, type, status, id)
     },
 
     // 删除投诉的Action
@@ -47,8 +53,13 @@ export const complaintStore = defineStore('complaint', {
     },
 
     // 添加投诉的Action
-    async addComplaintAction(content: string, userId: number) {
-      await addComplaint(content, userId)
+    async addComplaintAction(
+      content: string,
+      remark: string,
+      type: string,
+      userId: number
+    ) {
+      await addComplaint(content, remark, type, userId)
     }
   }
 })

@@ -12,14 +12,16 @@
     <!-- 投诉列表 -->
     <el-table :data="repairList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
-      <el-table-column prop="content" label="报修内容" width="300" />
+      <el-table-column prop="content" label="报修内容" width="200" />
       <el-table-column prop="place" label="报修地点" width="150" />
+      <el-table-column prop="type" label="维修类型" width="100" />
+      <el-table-column prop="remark" label="备注" width="100" />
       <el-table-column label="报修人" width="130">
         <template #default="scope">
           {{ scope.row.user.realname }}
         </template>
       </el-table-column>
-      <el-table-column label="联系方式" width="180">
+      <el-table-column label="联系方式" width="150">
         <template #default="scope">
           {{ scope.row.user.phone }}
         </template>
@@ -83,7 +85,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <!-- 编辑投诉内容 -->
+    <!-- 编辑报修内容 -->
     <my-dialog
       title-name="编辑报修"
       :confirm-fn="() => putEditRepairAction(realname, offset)"
@@ -102,11 +104,17 @@
         <el-form-item label="报修地点" prop="place">
           <el-input v-model="editRepairForm.place" />
         </el-form-item>
+        <el-form-item label="报修备注" prop="remark">
+          <el-input v-model="editRepairForm.remark" />
+        </el-form-item>
+        <el-form-item label="报修类型" prop="type">
+          <el-input v-model="editRepairForm.type" />
+        </el-form-item>
       </el-form>
     </my-dialog>
 
     <my-dialog
-      title-name="处理投诉"
+      title-name="处理报修"
       :confirm-fn="() => putEditRepairAction(realname, offset)"
       ref="handleRepairDialogRef"
     >
@@ -143,6 +151,12 @@
         </el-form-item>
         <el-form-item label="报修地点" prop="place">
           <el-input v-model="addRepairForm.place" />
+        </el-form-item>
+        <el-form-item label="报修备注" prop="remark">
+          <el-input v-model="addRepairForm.remark" />
+        </el-form-item>
+        <el-form-item label="报修类型" prop="type">
+          <el-input v-model="addRepairForm.type" />
         </el-form-item>
       </el-form>
     </my-dialog>

@@ -1,15 +1,21 @@
 <template>
-  <el-card class="property">
+  <el-card class="power">
     <general-top
       titleName="物业费列表"
       :isBtnShow="false"
-      :searchFn="searchProperty"
-      :resetFn="resetProperty"
+      :searchFn="searchPower"
+      :resetFn="resetPower"
     />
-    <el-table :data="propertyList" stripe style="width: 100%" border>
+    <el-table :data="powerList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
-      <el-table-column prop="remark" label="物业费介绍" width="230" />
-      <el-table-column prop="fees" label="物业费费用" width="100" />
+      <el-table-column prop="water_fees" label="水费" width="100" />
+      <el-table-column prop="electric_fees" label="电费费" width="100" />
+      <el-table-column prop="gas_fees" label="燃气费" width="100" />
+      <el-table-column label="备注" width="80">
+        <template #default="scope">
+          {{ scope.row.remark === null ? '无' : scope.row.remark }}
+        </template>
+      </el-table-column>
       <el-table-column label="起始时间" width="140">
         <template #default="scope">
           {{ renderTime(scope.row.createtime) }}
@@ -20,7 +26,7 @@
           {{ renderTime(scope.row.endtime) }}
         </template>
       </el-table-column>
-      <el-table-column label="缴费状态" width="130">
+      <el-table-column label="缴费状态" width="100">
         <template #default="scope">
           <el-tag
             class="ml-2"
@@ -58,8 +64,8 @@
               type="primary"
               :icon="EditPen"
               :underline="false"
-              @click="editPropertyBtn(scope.row)"
               v-if="isAdmin"
+              @click="() => editPowerBtn(scope.row)"
             >
               编辑
             </el-link>
@@ -68,7 +74,7 @@
               :icon="HelpFilled"
               :underline="false"
               v-if="!isAdmin && scope.row.status === '未缴费'"
-              @click="paymentBtn(scope.row.id)"
+              @click="() => payBtn(scope.row)"
             >
               缴费
             </el-link>
@@ -76,33 +82,40 @@
         </template>
       </el-table-column>
     </el-table>
+    <!-- 编辑水电费 -->
     <my-dialog
-      title-name="编辑物业费"
-      :confirm-fn="() => putEditPropertyAction(realname, offset)"
-      ref="editPropertyDialogRef"
+      title-name="编辑水电费"
+      ref="editPowerDialogRef"
+      :confirmFn="() => putUpdatePower(realname, offset)"
     >
       <el-form
         label-width="100px"
-        :model="editPropertyForm"
+        :model="editPowerForm"
         style="max-width: 460px"
-        :rules="editPropertyRule"
-        ref="editPropertyFormRef"
+        :rules="editPowerRule"
+        ref="editPowerFormRef"
       >
-        <el-form-item label="物业费介绍" prop="position">
-          <el-input v-model="editPropertyForm.remark" />
+        <el-form-item label="水费" prop="water_fees">
+          <el-input v-model="editPowerForm.water_fees" />
         </el-form-item>
-        <el-form-item label="物业费费用" prop="area">
-          <el-input v-model="editPropertyForm.fees" />
+        <el-form-item label="电费" prop="electric_fees">
+          <el-input v-model="editPowerForm.electric_fees" />
+        </el-form-item>
+        <el-form-item label="燃气费" prop="gas_fees">
+          <el-input v-model="editPowerForm.gas_fees" />
+        </el-form-item>
+        <el-form-item label="备注" prop="position">
+          <el-input v-model="editPowerForm.remark" />
         </el-form-item>
         <el-form-item label="缴费状态" prop="des">
-          <el-radio-group v-model="editPropertyForm.status">
+          <el-radio-group v-model="editPowerForm.status">
             <el-radio label="未缴费">未缴费</el-radio>
             <el-radio label="已缴费">已缴费</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="起始时间" prop="des">
           <el-date-picker
-            v-model="editPropertyForm.createtime"
+            v-model="editPowerForm.createtime"
             type="date"
             placeholder="Pick a day"
             format="YYYY-MM-DD"
@@ -111,7 +124,7 @@
         </el-form-item>
         <el-form-item label="截止时间" prop="des">
           <el-date-picker
-            v-model="editPropertyForm.endtime"
+            v-model="editPowerForm.endtime"
             type="date"
             placeholder="Pick a day"
             format="YYYY-MM-DD"
@@ -121,12 +134,12 @@
       </el-form>
     </my-dialog>
     <my-dialog
-      title-name="缴纳物业费"
+      title-name="缴纳水电燃气费"
       ref="paymentDialogRef"
       :confirm-fn="payFees"
     >
       <el-form label-width="100px" style="max-width: 460px">
-        <el-form-item label="缴纳金额">
+        <el-form-item label="缴纳总金额">
           <el-input v-model="fees" disabled />
         </el-form-item>
         <el-form-item label="缴纳方式">
@@ -151,16 +164,19 @@
 </template>
 
 <script setup lang="ts">
-import { EditPen, HelpFilled } from '@element-plus/icons-vue'
+import { powerStore } from '@/store/power/power'
 import { onMounted, ref } from 'vue'
-import generalTop from '@/components/general-top/general-top.vue'
-import { propertyStore } from '@/store/property/property'
-import { storeToRefs } from 'pinia'
-import { renderTime } from '@/utils/render-time'
-import MyPagination from '@/components/my-pagination/my-pagination.vue'
-import { useEditProperty } from './hooks/useEditProperty'
 import LocalCache from '@/utils/cache'
+import { EditPen, HelpFilled } from '@element-plus/icons-vue'
+import { renderTime } from '@/utils/render-time'
+import { storeToRefs } from 'pinia'
 import MyDialog from '@/components/my-dialog/my-dialog.vue'
+import generalTop from '@/components/general-top/general-top.vue'
+import MyPagination from '@/components/my-pagination/my-pagination.vue'
+import { useEditPower } from './hooks/useEditPower'
+const store = powerStore()
+const { powerList, total } = storeToRefs(store)
+const { isAdmin } = LocalCache.getCache('user')
 const options = [
   {
     value: '微信支付',
@@ -177,60 +193,54 @@ const options = [
 ]
 const pay = ref('微信支付')
 const fees = ref(300)
+const {
+  editPowerDialogRef,
+  editPowerFormRef,
+  editPowerForm,
+  editPowerRule,
+  powerId,
+  editPowerBtn,
+  putUpdatePower
+} = useEditPower()
 
+//缴纳费用
 const payFees = async () => {
-  await store.updatePropertyStatusAction(propertyId.value)
-  await store.getPropertyListAction()
+  await store.updatePowerStatusAction(powerId.value)
+  await store.getPowerListAction()
   paymentDialogRef.value.close()
 }
 
-const store = propertyStore()
-const { propertyList, total } = storeToRefs(store)
-const { isAdmin } = LocalCache.getCache('user')
+// 点击缴费显示对话框
 const paymentDialogRef = ref()
-
-const paymentBtn = (id: number) => {
-  propertyId.value = id
+const payBtn = (item: any) => {
+  fees.value = item.water_fees + item.electric_fees + item.gas_fees
+  powerId.value = item.id
   paymentDialogRef.value.open()
 }
-// 编辑物业费用的hooks
-const {
-  editPropertyDialogRef,
-  editPropertyFormRef,
-  editPropertyForm,
-  editPropertyBtn,
-  editPropertyRule,
-  putEditPropertyAction,
-  propertyId
-} = useEditProperty()
 
-// 页码改变的回调
+// 搜素房屋
+let realname = ref('') //搜索的文本
+const searchPower = (realName: string) => {
+  realname.value = realName
+  store.getPowerListAction(realname.value)
+}
+
+// 重置
+const paginationRef = ref()
+const resetPower = () => {
+  realname.value = ''
+  paginationRef.value.resetPage()
+  store.getPowerListAction()
+}
+
+// 页码改变
 let offset = ref(0) // 偏移量
 const pageChange = (currentPage: number) => {
   offset.value = (currentPage - 1) * 10
-  store.getPropertyListAction(realname.value, offset.value)
+  store.getPowerListAction(realname.value, offset.value)
 }
-// 搜素房屋
-let realname = ref('') //搜索的文本
-const searchProperty = (realName: string) => {
-  realname.value = realName
-  store.getPropertyListAction(realname.value)
-}
-
-// 重置房屋信息
-const paginationRef = ref()
-const resetProperty = () => {
-  realname.value = ''
-  paginationRef.value.resetPage()
-  store.getPropertyListAction()
-}
-
 onMounted(() => {
-  store.getPropertyListAction()
+  store.getPowerListAction()
 })
 </script>
-<style scoped lang="less">
-.el-link {
-  margin-right: 20px;
-}
-</style>
+<style scoped lang="less"></style>

@@ -10,6 +10,7 @@ export interface ICarList {
   position: string
   fees: number
   area: string
+  car_num: string
   remark: string
   createtime: string
   updatetime: string

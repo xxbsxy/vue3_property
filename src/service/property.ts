@@ -23,7 +23,7 @@ export function updateProperty(data: IUpdateData, id: number) {
   })
 }
 
-// 编辑物业信息
+// 缴纳物业费用
 export function updatePropertyStatus(id: number) {
   return myRequest.request({
     method: 'PUT',

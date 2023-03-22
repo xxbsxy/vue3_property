@@ -8,7 +8,9 @@ export function useAddRepair(userId: number) {
   // 添加报修的表单
   const addRepairForm = reactive({
     content: '',
-    place: ''
+    place: '',
+    remark: '',
+    type: ''
   })
   // 添加报修表单的规则
   const addRepairRule = reactive({
@@ -19,6 +21,14 @@ export function useAddRepair(userId: number) {
     place: [
       { required: true, message: '请输入报修地点', trigger: 'blur' },
       { min: 0, max: 30, message: '报修地点最多30个字', trigger: 'blur' }
+    ],
+    remark: [
+      { required: true, message: '请输入备注', trigger: 'blur' },
+      { min: 0, max: 30, message: '备注最多100个字', trigger: 'blur' }
+    ],
+    type: [
+      { required: true, message: '请输入报修类型', trigger: 'blur' },
+      { min: 0, max: 30, message: '报修类型最多10个字', trigger: 'blur' }
     ]
   })
   // 点击添加报修打开对话框
@@ -32,6 +42,8 @@ export function useAddRepair(userId: number) {
         await store.addRepairAction(
           addRepairForm.content,
           addRepairForm.place,
+          addRepairForm.remark,
+          addRepairForm.type,
           userId
         )
         await store.getRepairListAction(realname, offset)

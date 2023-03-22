@@ -10,6 +10,7 @@ export interface IHomeList {
   position: string
   area: string
   des: string
+  type: string
   createtime: string
   updatetime: string
   user: IUser
@@ -23,4 +24,5 @@ export interface IAddHomeData {
   position: string
   area: string
   des: string
+  type: string
 }

@@ -8,7 +8,8 @@ export function useEditHome() {
   const editHomeForm = reactive({
     position: '',
     area: '',
-    des: ''
+    des: '',
+    type: ''
   })
   // 点击编辑打开对话框
   const homeId = ref(-1)
@@ -17,6 +18,8 @@ export function useEditHome() {
     editHomeForm.position = home.position
     editHomeForm.area = home.area
     editHomeForm.des = home.des
+    editHomeForm.des = home.type
+
     editHomeDialogRef.value.open()
   }
   // 编辑房屋表单的规则
@@ -32,6 +35,10 @@ export function useEditHome() {
     des: [
       { required: true, message: '请输入房屋描述', trigger: 'blur' },
       { min: 0, max: 250, message: '房屋描述最多250个字', trigger: 'blur' }
+    ],
+    type: [
+      { required: true, message: '请输入房屋类型', trigger: 'blur' },
+      { min: 0, max: 250, message: '房屋类型最多10个字', trigger: 'blur' }
     ]
   })
   // 点击确认派发编辑房屋Action

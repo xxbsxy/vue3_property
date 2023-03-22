@@ -12,13 +12,16 @@
     <!-- 投诉列表 -->
     <el-table :data="complaintList" stripe style="width: 100%" border>
       <el-table-column type="index" width="60" label="序号" />
-      <el-table-column prop="content" label="投诉内容" width="400" />
-      <el-table-column label="投诉人" width="150">
+      <el-table-column prop="content" label="投诉内容" width="250" />
+      <el-table-column prop="type" label="投诉类型" width="130" />
+      <el-table-column prop="remark" label="备注" width="130" />
+
+      <el-table-column label="投诉人" width="100">
         <template #default="scope">
           {{ scope.row.user.realname }}
         </template>
       </el-table-column>
-      <el-table-column label="联系方式" width="180">
+      <el-table-column label="联系方式" width="150">
         <template #default="scope">
           {{ scope.row.user.phone }}
         </template>
@@ -28,7 +31,7 @@
           {{ renderTime(scope.row.createtime, false) }}
         </template>
       </el-table-column>
-      <el-table-column label="当前状态" width="160">
+      <el-table-column label="当前状态" width="130">
         <template #default="scope">
           <el-tag
             class="ml-2"
@@ -98,6 +101,12 @@
         <el-form-item label="投诉内容" prop="content">
           <el-input v-model="editComplaintForm.content" />
         </el-form-item>
+        <el-form-item label="投诉类型" prop="type">
+          <el-input v-model="editComplaintForm.type" />
+        </el-form-item>
+        <el-form-item label="备注" prop="remark">
+          <el-input v-model="editComplaintForm.remark" />
+        </el-form-item>
       </el-form>
     </my-dialog>
 
@@ -137,6 +146,12 @@
       >
         <el-form-item label="投诉内容" prop="content">
           <el-input v-model="addComplaintForm.content" />
+        </el-form-item>
+        <el-form-item label="投诉类型" prop="type">
+          <el-input v-model="addComplaintForm.type" />
+        </el-form-item>
+        <el-form-item label="投诉内容" prop="remark">
+          <el-input v-model="addComplaintForm.remark" />
         </el-form-item>
       </el-form>
     </my-dialog>

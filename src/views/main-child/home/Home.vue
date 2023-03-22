@@ -13,8 +13,19 @@
       <el-table-column type="index" width="60" label="序号" />
       <el-table-column prop="position" label="房屋位置" width="130" />
       <el-table-column prop="area" label="房屋面积" width="130" />
-      <el-table-column prop="des" label="房屋描述" width="350" />
+      <el-table-column prop="des" label="房屋描述" width="200" />
+      <el-table-column prop="type" label="房屋类型" width="100" />
 
+      <el-table-column label="房屋状态" width="130">
+        <template #default="scope">
+          <el-tag class="ml-2" type="danger" v-if="!scope.row.user.realname">
+            空闲
+          </el-tag>
+          <el-tag class="ml-2" type="success" v-if="scope.row.user.realname"
+            >已出售</el-tag
+          >
+        </template>
+      </el-table-column>
       <el-table-column label="房主" width="130">
         <template #default="scope">
           {{ scope.row.user.realname ? scope.row.user.realname : '/' }}
@@ -99,6 +110,9 @@
         </el-form-item>
         <el-form-item label="房屋描述" prop="des">
           <el-input v-model="editHomeForm.des" />
+        </el-form-item>
+        <el-form-item label="房屋类型" prop="type">
+          <el-input v-model="editHomeForm.type" />
         </el-form-item>
       </el-form>
     </my-dialog>

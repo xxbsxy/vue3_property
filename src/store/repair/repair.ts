@@ -17,7 +17,7 @@ export const repairStore = defineStore('repair', {
     }
   },
   actions: {
-    // 获取投诉列表的Action
+    // 获取报修列表的Action
     async getRepairListAction(realname?: string, offset?: number) {
       const { isAdmin, userId } = LocalCache.getCache('user')
       if (isAdmin) {
@@ -32,22 +32,30 @@ export const repairStore = defineStore('repair', {
         this.total = res.total
       }
     },
-    // 更新投诉的Action
+    // 更新报修的Action
     async updateRepairAction(
       content: string,
       place: string,
+      remark: string,
+      type: string,
       status: string,
       id: number
     ) {
-      await updateRepair(content, place, status, id)
+      await updateRepair(content, place, remark, type, status, id)
     },
-    // 删除投诉的Action
+    // 删除报修的Action
     async deleteRepairAction(id: number) {
       await deleteRepair(id)
     },
-    // 添加投诉的Action
-    async addRepairAction(content: string, place: string, userId: number) {
-      await addRepair(content, place, userId)
+    // 添加报修的Action
+    async addRepairAction(
+      content: string,
+      place: string,
+      remark: string,
+      type: string,
+      userId: number
+    ) {
+      await addRepair(content, place, remark, type, userId)
     }
   }
 })

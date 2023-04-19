@@ -34,13 +34,11 @@
           <el-button class="login-btn" color="#626aef" @click="login"
             >登录</el-button
           >
-          <!-- <div class="text">用户账号: ikun 密码: 123456 仅供测试</div> -->
         </div>
       </el-col>
     </el-row>
   </div>
 </template>
-
 <script setup lang="ts">
 import { UserFilled, PhoneFilled } from '@element-plus/icons-vue'
 

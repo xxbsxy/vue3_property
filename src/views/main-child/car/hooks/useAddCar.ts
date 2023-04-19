@@ -9,6 +9,7 @@ export function useAddCar() {
     position: '',
     area: '',
     fees: '',
+    car_num: '',
     remark: ''
   })
   // 点击添加停车位打开对话框
@@ -26,6 +27,7 @@ export function useAddCar() {
       { min: 0, max: 50, message: '停车位面积最多50个字', trigger: 'blur' }
     ],
     fees: [{ required: true, message: '请输入停车位价格', trigger: 'blur' }],
+    car_num: [{ required: true, message: '请输入停车位价格', trigger: 'blur' }],
     remark: [
       { required: true, message: '请输入备注', trigger: 'blur' },
       { min: 0, max: 100, message: '备注最多100个字', trigger: 'blur' }

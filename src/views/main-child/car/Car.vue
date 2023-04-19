@@ -85,6 +85,9 @@
         <el-form-item label="停车位价格" prop="fees" type="number">
           <el-input v-model="addCarForm.fees" />
         </el-form-item>
+        <el-form-item label="车牌号码" prop="car_num" type="string">
+          <el-input v-model="addCarForm.car_num" />
+        </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="addCarForm.remark" />
         </el-form-item>

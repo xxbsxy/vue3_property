@@ -117,12 +117,6 @@
         <el-form-item label="备注" prop="remark">
           <el-input v-model="editComplaintForm.remark" />
         </el-form-item>
-        <el-form-item label="处理人" prop="handle_user">
-          <el-input v-model="editComplaintForm.handle_user" />
-        </el-form-item>
-        <el-form-item label="联系方式" prop="handle_phone">
-          <el-input v-model="editComplaintForm.handle_phone" />
-        </el-form-item>
       </el-form>
     </my-dialog>
 
@@ -173,7 +167,7 @@
         <el-form-item label="投诉类型" prop="type">
           <el-input v-model="addComplaintForm.type" />
         </el-form-item>
-        <el-form-item label="投诉内容" prop="remark">
+        <el-form-item label="备注" prop="remark">
           <el-input v-model="addComplaintForm.remark" />
         </el-form-item>
       </el-form>

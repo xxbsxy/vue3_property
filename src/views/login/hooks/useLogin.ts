@@ -30,7 +30,7 @@ export function useLogin() {
         store.tabList = []
         const { isAdmin } = LocalCache.getCache('user')
         if (isAdmin) {
-          router.push('/user')
+          router.push('/home')
         } else {
           router.push('/information')
         }

@@ -12,3 +12,9 @@ export function login(account: IAccount) {
     data: account
   })
 }
+
+export function getDataList() {
+  return myRequest.request({
+    url: '/data'
+  })
+}

@@ -17,6 +17,7 @@ interface IAddCarData {
   position: string
   area: string
   fees: string
+  car_num?: string
   remark: string
 }
 export function addCar(data: IAddCarData) {

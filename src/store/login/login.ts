@@ -1,7 +1,7 @@
-import { login } from '@/service/login'
+import { getDataList, login } from '@/service/login'
 import { defineStore } from 'pinia'
 import LocalCache from '@/utils/cache'
-import type { ILoginResult, IUser, IAccount, ITabList } from './type'
+import type { ILoginResult, IUser, IAccount, ITabList, Data } from './type'
 import type { IEditUser } from '../user/type'
 import { editUser } from '@/service/user'
 export const loginStore = defineStore('login', {
@@ -10,7 +10,8 @@ export const loginStore = defineStore('login', {
     return {
       user: {} as IUser,
       tabList: [] as ITabList[],
-      isCollapse: false // 控制菜单的折叠
+      isCollapse: false, // 控制菜单的折叠,
+      data: {} as Data
     }
   },
   actions: {
@@ -29,6 +30,10 @@ export const loginStore = defineStore('login', {
     // 编辑用户的Action
     async editUserAction(data: IEditUser, id: number) {
       await editUser(data, id)
+    },
+    async getDataListAction() {
+      const res = await getDataList()
+      this.data = res as Data
     }
   }
 })

@@ -120,12 +120,6 @@
         <el-form-item label="报修类型" prop="type">
           <el-input v-model="editRepairForm.type" />
         </el-form-item>
-        <el-form-item label="处理人" prop="handle_user">
-          <el-input v-model="editRepairForm.handle_user" />
-        </el-form-item>
-        <el-form-item label="联系方式" prop="handle_phone">
-          <el-input v-model="editRepairForm.handle_phone" />
-        </el-form-item>
       </el-form>
     </my-dialog>
 

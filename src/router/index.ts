@@ -17,6 +17,11 @@ const router = createRouter({
       component: () => import('@/views/main/Main.vue'),
       children: [
         {
+          path: '/home',
+          component: () => import('@/views/main-child/home/Home.vue'),
+          meta: { title: ' 后台首页 ' }
+        },
+        {
           path: '/user',
           component: () => import('@/views/main-child/user/User.vue'),
           meta: { title: ' 用户列表 ' }
@@ -32,8 +37,8 @@ const router = createRouter({
           meta: { title: ' 报修列表 ' }
         },
         {
-          path: '/home',
-          component: () => import('@/views/main-child/home/Home.vue'),
+          path: '/house',
+          component: () => import('@/views/main-child/house/House.vue'),
           meta: { title: ' 房屋列表 ' }
         },
         {

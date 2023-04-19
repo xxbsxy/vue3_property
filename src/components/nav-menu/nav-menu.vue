@@ -42,6 +42,12 @@ const { isAdmin } = LocalCache.getCache('user')
 const menuList = isAdmin
   ? [
       {
+        id: 0,
+        name: '后台首页',
+        icon: 'Menu',
+        children: [{ id: 1, name: '后台首页', path: '/home' }]
+      },
+      {
         id: 1,
         name: '用户管理',
         icon: 'UserFilled',
@@ -63,7 +69,7 @@ const menuList = isAdmin
         id: 4,
         name: '房屋管理',
         icon: 'HomeFilled',
-        children: [{ id: 1, name: '房屋列表', path: '/home' }]
+        children: [{ id: 1, name: '房屋列表', path: '/house' }]
       },
       {
         id: 5,
@@ -107,7 +113,7 @@ const menuList = isAdmin
         id: 4,
         name: '房屋管理',
         icon: 'HomeFilled',
-        children: [{ id: 1, name: '我的房屋', path: '/home' }]
+        children: [{ id: 1, name: '我的房屋', path: '/house' }]
       },
       {
         id: 5,
@@ -122,7 +128,7 @@ const menuList = isAdmin
         children: [{ id: 1, name: '物业费列表', path: '/property' }]
       },
       {
-        id: 6,
+        id: 7,
         name: '水电费管理',
         icon: 'Briefcase',
         children: [{ id: 1, name: '水电费列表', path: '/power' }]
